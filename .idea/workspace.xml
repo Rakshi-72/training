@@ -5,18 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="471fa030-4bf8-464d-b7f1-f004f7e4c04d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/main_app/test/MainAppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/main_app/test/MainAppTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -39,19 +39,50 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
-  <component name="RunManager" selected="JUnit.MainAppTest.countMaleAndFemaleTest">
+}]]></component>
+  <component name="RunManager" selected="JUnit.MainAppTest.getYoungestMaleEmployeeTest">
+    <configuration name="MainAppTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="training" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main_app.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main_app.test" />
+      <option name="MAIN_CLASS_NAME" value="main_app.test.MainAppTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MainAppTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="training" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="MainAppTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainAppTest.allDepartmentsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="training" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main_app.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main_app.test" />
+      <option name="MAIN_CLASS_NAME" value="main_app.test.MainAppTest" />
+      <option name="METHOD_NAME" value="allDepartmentsTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -66,8 +97,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MainAppTest.getYoungestMaleEmployeeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="training" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main_app.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main_app.test" />
+      <option name="MAIN_CLASS_NAME" value="main_app.test.MainAppTest" />
+      <option name="METHOD_NAME" value="getYoungestMaleEmployeeTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MainAppTest.getYoungestMaleEmployeeTest" />
+        <item itemvalue="JUnit.MainAppTest.allDepartmentsTest" />
+        <item itemvalue="JUnit.MainAppTest (1)" />
         <item itemvalue="JUnit.MainAppTest.countMaleAndFemaleTest" />
         <item itemvalue="JUnit.MainAppTest" />
       </list>
@@ -94,5 +144,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

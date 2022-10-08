@@ -67,7 +67,7 @@ public class MainAppTest {
      */
     @Test
     public void allDepartmentsTest() {
-        Set<String> departments = new LinkedHashSet<>();
+        List<String> departments = new ArrayList<>();
         departments.add("development");
         departments.add("design");
         departments.add("sales");

@@ -9,7 +9,11 @@ public class Employee {
     private Integer yearOfJoining;
     private Long salary;
 
-    public Employee(Integer id, String name, Integer age, String gender, String department, Integer yearOfJoining, Long salary) {
+    public Employee() {
+    }
+
+    public Employee(Integer id, String name, Integer age, String gender, String department, Integer yearOfJoining,
+            Long salary) {
         this.id = id;
         this.name = name;
         this.age = age;

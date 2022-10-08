@@ -21,7 +21,7 @@ public class MainApp {
      */
     public Map<String, Long> countMaleAndFemale(List<Employee> employees) {
         Map<String, Long> genders = new HashMap<>();
-        long male = employees.stream().filter(e -> e.getGender().equalsIgnoreCase("male")).count();
+        Long male = employees.stream().filter(e -> e.getGender().equalsIgnoreCase("male")).count();
         genders.put("male", male);
         genders.put("female", employees.size() - male);
         return genders;
@@ -33,9 +33,9 @@ public class MainApp {
      * @param employees a list of employees
      * @return A set of all the departments in the list of employees.
      */
-    public Set<String> allDepartments(List<Employee> employees) {
-        Set<String> departments = new HashSet<>();
-        employees.forEach(e -> departments.add(e.getDepartment()));
+    public List<String> allDepartments(List<Employee> employees) {
+
+        List<String> departments = employees.stream().map(Employee::getDepartment).distinct().collect(Collectors.toList());
         return departments;
     }
 
@@ -49,7 +49,7 @@ public class MainApp {
     public Map<String, Integer> averageAgeOfEmployees(List<Employee> employees) {
         Map<String, Integer> ages = new HashMap<>();
 
-        Integer[] genders = { 0, 0, 0 };
+        Integer[] genders = {0, 0, 0};
 
         employees.forEach(employee -> {
             if (employee.getGender().equalsIgnoreCase("male")) {
@@ -97,7 +97,7 @@ public class MainApp {
      *
      * @param employees a list of Employee objects
      * @return A map of department names and the number of employees in each
-     *         department.
+     * department.
      */
     public Map<String, Integer> countNumberOfEmployeesInEachDepartment(List<Employee> employees) {
         Map<String, Integer> departmentEmployees = new LinkedHashMap<>();
@@ -127,7 +127,7 @@ public class MainApp {
      *
      * @param employees List of employees
      * @return A map of department and average salary of employees in that
-     *         department.
+     * department.
      */
     public Map<String, Long> averageSalaryOfEachDepartment(List<Employee> employees) {
         Map<String, Long> departmentEmployees = new LinkedHashMap<>();
@@ -157,8 +157,7 @@ public class MainApp {
      */
     public Employee getYoungestMaleEmployee(List<Employee> employees) throws EmployeeNotFound {
         Employee youngestEmployee = employees.stream()
-                .filter(employee -> employee.getDepartment().equalsIgnoreCase("productDevelopment"))
-                .filter(employee -> employee.getGender().equalsIgnoreCase("male"))
+                .filter(employee -> employee.getDepartment().equalsIgnoreCase("productDevelopment") && employee.getGender().equalsIgnoreCase("male"))
                 .min(Comparator.comparingInt(Employee::getAge))
                 .orElseThrow(() -> new EmployeeNotFound("productDevelopment"));
         return youngestEmployee;
@@ -182,9 +181,9 @@ public class MainApp {
      *
      * @param employees List of employees
      * @return A map of maps. The outer map has two keys, "sales" and "marketing".
-     *         The inner maps have two keys, "male" and
-     *         "female". The values of the inner maps are the number of employees in
-     *         the department with the corresponding gender.
+     * The inner maps have two keys, "male" and
+     * "female". The values of the inner maps are the number of employees in
+     * the department with the corresponding gender.
      */
     public Map<String, Map<String, Integer>> employeesInSaleAndMarketing(List<Employee> employees) {
         Map<String, Map<String, Integer>> maleAndFemales = new LinkedHashMap<>();
@@ -231,7 +230,7 @@ public class MainApp {
      * @return A map with the average salary of male and female employees.
      */
     public Map<String, Long> avgMaleFemaleSalary(List<Employee> employees) {
-        Long[] genders = { 0l, 0l, 0l };
+        Long[] genders = {0l, 0l, 0l};
         employees.forEach(employee -> {
             if (employee.getGender().equalsIgnoreCase("male")) {
                 genders[0] += employee.getSalary();
@@ -279,7 +278,7 @@ public class MainApp {
      *
      * @param employees a list of employees
      * @return A map with two keys, "total" and "average", and the corresponding
-     *         values.
+     * values.
      */
     public Map<String, Long> avgAndTotalSalary(List<Employee> employees) {
         Long totalSalary = employees.stream().map(employee -> employee.getSalary()).reduce((a, b) -> a + b).get();
@@ -293,7 +292,7 @@ public class MainApp {
      * It takes a list of employees, separates them into two lists based on their
      * age, and returns a
      * map of those two lists
-     * 
+     *
      * @param employees List of employees
      * @return A map of employees.
      */
@@ -314,10 +313,10 @@ public class MainApp {
 
     /**
      * "Return the employee with the highest age from the list of employees."
-     * 
+     * <p>
      * The function takes a list of employees and returns the employee with the
      * highest age
-     * 
+     *
      * @param employees The list of employees to be sorted.
      * @return The oldest employee
      */
