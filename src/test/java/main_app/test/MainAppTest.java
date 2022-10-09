@@ -1,16 +1,5 @@
 package main_app.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.example.MainApp;
 import org.example.exceptions.EmployeeNotFound;
 import org.example.model.Employee;
@@ -19,10 +8,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 @TestInstance(Lifecycle.PER_CLASS)
 public class MainAppTest {
 
-    private List<Employee> employees = getList();
+    private final List<Employee> employees = getList();
 
     /**
      * It returns a list of employees
@@ -30,11 +26,11 @@ public class MainAppTest {
      * @return A list of employees
      */
     private List<Employee> getList() {
-        return List.of(new Employee(1, "rakshith", 23, "male", "development", 2016, 3500000l),
-                new Employee(2, "ramya", 25, "female", "design", 2023, 34000l),
-                new Employee(3, "ranjini", 23, "female", "development", 2022, 350000l),
-                new Employee(4, "kichha", 24, "male", "sales", 2022, 130000l),
-                new Employee(5, "Dilip", 20, "male", "marketing", 2022, 300000l));
+        return List.of(new Employee(1, "rakshith", 23, "male", "development", 2016, 3500000L),
+                new Employee(2, "ramya", 25, "female", "design", 2023, 34000L),
+                new Employee(3, "ranjini", 23, "female", "development", 2022, 350000L),
+                new Employee(4, "kichha", 24, "male", "sales", 2022, 130000L),
+                new Employee(5, "Dilip", 20, "male", "marketing", 2022, 300000L));
     }
 
     public MainApp app;
@@ -55,9 +51,9 @@ public class MainAppTest {
     public void countMaleAndFemaleTest() {
         Map<String, Long> countMaleAndFemale = app.countMaleAndFemale(employees);
         Map<String, Long> actualResultMap = new HashMap<>();
-        actualResultMap.put("male", 3l);
-        actualResultMap.put("female", 2l);
-        assertEquals(actualResultMap, countMaleAndFemale, () -> "count should be male :3, female :2");
+        actualResultMap.put("male", 3L);
+        actualResultMap.put("female", 2L);
+        assertEquals(actualResultMap, countMaleAndFemale, "count should be male :3, female :2");
     }
 
     /**
@@ -74,7 +70,7 @@ public class MainAppTest {
         departments.add("marketing");
 
         assertEquals(departments, app.allDepartments(employees),
-                () -> "it should contains 'development', 'design', 'sales', 'marketing' ");
+                "it should contains 'development', 'design', 'sales', 'marketing' ");
     }
 
     /**
@@ -86,7 +82,7 @@ public class MainAppTest {
         Map<String, Integer> averageAge = new HashMap<>();
         averageAge.put("male", 22);
         averageAge.put("female", 24);
-        assertEquals(averageAge, app.averageAgeOfEmployees(employees), () -> "average age of male :23, female :23");
+        assertEquals(averageAge, app.averageAgeOfEmployees(employees), "average age of male :23, female :23");
     }
 
     /**
@@ -94,7 +90,7 @@ public class MainAppTest {
      */
     @Test
     public void getMaxPayedEmployeeTest() {
-        Employee expected = new Employee(1, "rakshith", 23, "male", "development", 2022, 3500000l);
+        Employee expected = new Employee(1, "rakshith", 23, "male", "development", 2022, 3500000L);
         assertEquals(expected.getName(), app.getMaxPayedEmployee(employees).getName(), "maxPayed employee :rakshith");
     }
 
@@ -133,10 +129,10 @@ public class MainAppTest {
     @Test
     public void averageSalaryOfEachDepartmentTest() {
         Map<String, Long> expected = new HashMap<>();
-        expected.put("development", 1925000l);
-        expected.put("design", 34000l);
-        expected.put("marketing", 300000l);
-        expected.put("sales", 130000l);
+        expected.put("development", 1925000L);
+        expected.put("design", 34000L);
+        expected.put("marketing", 300000L);
+        expected.put("sales", 130000L);
 
         assertEquals(expected, app.averageSalaryOfEachDepartment(employees), "should calculate accurate average");
     }
@@ -157,7 +153,7 @@ public class MainAppTest {
      */
     @Test
     public void getMaxExperiencedEmployeeTest() {
-        Employee expected = new Employee(1, "rakshith", 23, "male", "development", 2016, 3500000l);
+        Employee expected = new Employee(1, "rakshith", 23, "male", "development", 2016, 3500000L);
         assertSame(expected.getName(), app.getMaxExperiencedEmployee(employees).getName(),
                 "max experienced employee is rakshith");
     }
@@ -187,8 +183,8 @@ public class MainAppTest {
     @Test
     public void avgMaleFemaleSalaryTest() {
         Map<String, Long> expected = new HashMap<>();
-        expected.put("male", 1310000l);
-        expected.put("female", 192000l);
+        expected.put("male", 1310000L);
+        expected.put("female", 192000L);
 
         assertEquals(expected, app.avgMaleFemaleSalary(employees), "avg salary male = 1310000, female = 192000");
     }
@@ -206,7 +202,7 @@ public class MainAppTest {
         expected.put("marketing", List.of("Dilip"));
 
         assertEquals(expected, app.employeesInEachDepartment(employees),
-                "sales= Dilip, development= rakshith, ranjin, design= ramya, sales= kichha");
+                "sales= Dilip, development= rakshith, ranjini, design= ramya, sales= kichha");
     }
 
     /**
@@ -217,8 +213,8 @@ public class MainAppTest {
     @Test
     public void avgAndTotalSalary() {
         Map<String, Long> expected = new HashMap<>();
-        expected.put("total", 4314000l);
-        expected.put("average", 4314000l / 5);
+        expected.put("total", 4314000L);
+        expected.put("average", 4314000L / 5);
 
         assertEquals(expected, app.avgAndTotalSalary(employees), "avg= " + 4314000 / 5 + "total= 4314000");
     }

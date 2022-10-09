@@ -21,7 +21,7 @@ public class MainApp {
      */
     public Map<String, Long> countMaleAndFemale(List<Employee> employees) {
         Map<String, Long> genders = new HashMap<>();
-        Long male = employees.stream().filter(e -> e.getGender().equalsIgnoreCase("male")).count();
+        long male = employees.stream().filter(e -> e.getGender().equalsIgnoreCase("male")).count();
         genders.put("male", male);
         genders.put("female", employees.size() - male);
         return genders;
@@ -35,8 +35,7 @@ public class MainApp {
      */
     public List<String> allDepartments(List<Employee> employees) {
 
-        List<String> departments = employees.stream().map(Employee::getDepartment).distinct().collect(Collectors.toList());
-        return departments;
+        return employees.stream().map(Employee::getDepartment).distinct().collect(Collectors.toList());
     }
 
     /**
@@ -72,11 +71,7 @@ public class MainApp {
      * @return The employee with the highest salary.
      */
     public Employee getMaxPayedEmployee(List<Employee> employees) {
-        return Collections.max(employees, (a, b) -> {
-            if (a.getSalary() > b.getSalary())
-                return 1;
-            return -1;
-        });
+        return Collections.max(employees, Comparator.comparingLong(Employee::getSalary));
     }
 
     /**
@@ -142,10 +137,8 @@ public class MainApp {
             }
         }
 
-        for (Map.Entry<String, Long> entry : departmentEmployees.entrySet()) {
-            departmentEmployees.put(entry.getKey(),
-                    entry.getValue() / noOfEmployeesInEachDepartment.get(entry.getKey()));
-        }
+        departmentEmployees.replaceAll(
+                (department, salary) -> salary / noOfEmployeesInEachDepartment.get(department));
         return departmentEmployees;
     }
 
@@ -156,11 +149,10 @@ public class MainApp {
      * @return The youngest male employee in the productDevelopment department.
      */
     public Employee getYoungestMaleEmployee(List<Employee> employees) throws EmployeeNotFound {
-        Employee youngestEmployee = employees.stream()
+        return employees.stream()
                 .filter(employee -> employee.getDepartment().equalsIgnoreCase("productDevelopment") && employee.getGender().equalsIgnoreCase("male"))
                 .min(Comparator.comparingInt(Employee::getAge))
                 .orElseThrow(() -> new EmployeeNotFound("productDevelopment"));
-        return youngestEmployee;
     }
 
     /**
@@ -230,7 +222,7 @@ public class MainApp {
      * @return A map with the average salary of male and female employees.
      */
     public Map<String, Long> avgMaleFemaleSalary(List<Employee> employees) {
-        Long[] genders = {0l, 0l, 0l};
+        Long[] genders = {0L, 0L, 0L};
         employees.forEach(employee -> {
             if (employee.getGender().equalsIgnoreCase("male")) {
                 genders[0] += employee.getSalary();
@@ -281,7 +273,7 @@ public class MainApp {
      * values.
      */
     public Map<String, Long> avgAndTotalSalary(List<Employee> employees) {
-        Long totalSalary = employees.stream().map(employee -> employee.getSalary()).reduce((a, b) -> a + b).get();
+        Long totalSalary = employees.stream().map(Employee::getSalary).reduce(Long::sum).get();
         Map<String, Long> salaries = new LinkedHashMap<>();
         salaries.put("total", totalSalary);
         salaries.put("average", totalSalary / employees.size());
@@ -321,11 +313,11 @@ public class MainApp {
      * @return The oldest employee
      */
     public Employee oldestEmployee(List<Employee> employees) {
-        return Collections.max(employees, (a, b) -> a.getAge() - b.getAge());
+        return Collections.max(employees, Comparator.comparingInt(Employee::getAge));
     }
 
     public List<Employee> getList() {
-        Integer noOfEmployees = sc.nextInt();
+        int noOfEmployees = sc.nextInt();
         List<Employee> employees = new ArrayList<>();
         for (int i = 0; i < noOfEmployees; i++) {
             System.out.println("enter id");
