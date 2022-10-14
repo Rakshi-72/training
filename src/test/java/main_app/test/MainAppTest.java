@@ -128,11 +128,11 @@ public class MainAppTest {
      */
     @Test
     public void averageSalaryOfEachDepartmentTest() {
-        Map<String, Long> expected = new HashMap<>();
-        expected.put("development", 1925000L);
-        expected.put("design", 34000L);
-        expected.put("marketing", 300000L);
-        expected.put("sales", 130000L);
+        Map<String, Double> expected = new HashMap<>();
+        expected.put("development", 1925000.00);
+        expected.put("design", 34000.00);
+        expected.put("marketing", 300000.00);
+        expected.put("sales", 130000.00);
 
         assertEquals(expected, app.averageSalaryOfEachDepartment(employees), "should calculate accurate average");
     }

@@ -19,9 +19,8 @@ public class MainApp {
      * @return A map of the genders and the number of employees of that gender.
      */
     public Map<String, Long> countMaleAndFemale(List<Employee> employees) {
-        Map<String, Long> genders = new HashMap<>();
-        employees.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
-        return genders;
+
+        return employees.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
     }
 
     /**
