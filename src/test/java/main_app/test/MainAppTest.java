@@ -79,10 +79,10 @@ public class MainAppTest {
      */
     @Test
     public void averageAgeOfEmployeesTest() {
-        Map<String, Integer> averageAge = new HashMap<>();
-        averageAge.put("male", 22);
-        averageAge.put("female", 24);
-        assertEquals(averageAge, app.averageAgeOfEmployees(employees), "average age of male :23, female :23");
+        Map<String, Double> averageAge = new HashMap<>();
+        averageAge.put("male", 22.33);
+        averageAge.put("female", 24.00);
+        assertEquals(averageAge, app.averageAgeOfEmployees(employees), "average age of male :22.33, female :24.00");
     }
 
     /**
@@ -112,11 +112,11 @@ public class MainAppTest {
      */
     @Test
     public void countNumberOfEmployeesInEachDepartmentTest() {
-        Map<String, Integer> expected = new HashMap<>();
-        expected.put("development", 2);
-        expected.put("design", 1);
-        expected.put("marketing", 1);
-        expected.put("sales", 1);
+        Map<String, Long> expected = new HashMap<>();
+        expected.put("development", 2L);
+        expected.put("design", 1L);
+        expected.put("marketing", 1L);
+        expected.put("sales", 1L);
 
         assertEquals(expected, app.countNumberOfEmployeesInEachDepartment(employees),
                 "development :2, design :1, marketing :1, sales :1");
@@ -165,11 +165,11 @@ public class MainAppTest {
      */
     @Test
     public void employeesInSaleAndMarketingTest() {
-        Map<String, Map<String, Integer>> expected = new HashMap<>();
-        Map<String, Integer> sales = new HashMap<>();
-        sales.put("male", 1);
-        Map<String, Integer> marketing = new HashMap<>();
-        marketing.put("male", 1);
+        Map<String, Map<String, Long>> expected = new HashMap<>();
+        Map<String, Long> sales = new HashMap<>();
+        sales.put("male", 1L);
+        Map<String, Long> marketing = new HashMap<>();
+        marketing.put("male", 1L);
         expected.put("sales", sales);
         expected.put("marketing", marketing);
 
@@ -182,9 +182,9 @@ public class MainAppTest {
      */
     @Test
     public void avgMaleFemaleSalaryTest() {
-        Map<String, Long> expected = new HashMap<>();
-        expected.put("male", 1310000L);
-        expected.put("female", 192000L);
+        Map<String, Double> expected = new HashMap<>();
+        expected.put("male", 1310000.00);
+        expected.put("female", 192000.00);
 
         assertEquals(expected, app.avgMaleFemaleSalary(employees), "avg salary male = 1310000, female = 192000");
     }

@@ -3,27 +3,24 @@ package org.example;
 import org.example.exceptions.EmployeeNotFound;
 import org.example.model.Employee;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class MainApp {
     private static final Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
-
-    }
-
     /**
-     * Count the number of male and female employees in the list.
-     *
-     * @param employees The list of employees
-     * @return A map with the number of male and female employees.
+     * It takes a list of employees and returns a map of gender to the number of
+     * employees of that
+     * gender
+     * 
+     * @param employees List of employees
+     * @return A map of the genders and the number of employees of that gender.
      */
     public Map<String, Long> countMaleAndFemale(List<Employee> employees) {
         Map<String, Long> genders = new HashMap<>();
-        long male = employees.stream().filter(e -> e.getGender().equalsIgnoreCase("male")).count();
-        genders.put("male", male);
-        genders.put("female", employees.size() - male);
+        employees.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
         return genders;
     }
 
@@ -39,29 +36,19 @@ public class MainApp {
     }
 
     /**
-     * It takes a list of employees, and returns a map of the average age of male
-     * and female employees
-     *
-     * @param employees a list of employees
-     * @return A map with the average age of male and female employees.
+     * It takes a list of employees and returns a map of gender to average age of
+     * employees of that
+     * gender
+     * 
+     * @param employees List of employees
+     * @return A map of gender to average age of employees.
      */
-    public Map<String, Integer> averageAgeOfEmployees(List<Employee> employees) {
-        Map<String, Integer> ages = new HashMap<>();
+    public Map<String, Double> averageAgeOfEmployees(List<Employee> employees) {
 
-        Integer[] genders = {0, 0, 0};
-
-        employees.forEach(employee -> {
-            if (employee.getGender().equalsIgnoreCase("male")) {
-                genders[0] += employee.getAge();
-                genders[2]++;
-            } else
-                genders[1] += employee.getAge();
-        });
-
-        ages.put("male", genders[0] / genders[2]);
-        ages.put("female", genders[1] / (employees.size() - genders[2]));
-
-        return ages;
+        Map<String, Double> resultMap = employees.stream()
+                .collect(Collectors.groupingBy(Employee::getGender, Collectors.averagingLong(Employee::getAge)));
+        resultMap.replaceAll((gender, age) -> this.getFormattedDouble(age));
+        return resultMap;
     }
 
     /**
@@ -85,60 +72,33 @@ public class MainApp {
     }
 
     /**
-     * For each employee in the list of employees, if the department of the employee
-     * is already in the map, then increment
-     * the count of employees in that department by 1, else add the department to
-     * the map with a count of 1
-     *
-     * @param employees a list of Employee objects
+     * It takes a list of employees and returns a map of department to number of
+     * employees in that
+     * department
+     * 
+     * @param employees List of employees
      * @return A map of department names and the number of employees in each
-     * department.
+     *         department.
      */
-    public Map<String, Integer> countNumberOfEmployeesInEachDepartment(List<Employee> employees) {
-        Map<String, Integer> departmentEmployees = new LinkedHashMap<>();
-        for (Employee employee : employees) {
-            if (departmentEmployees.containsKey(employee.getDepartment())) {
-                departmentEmployees.put(employee.getDepartment(),
-                        departmentEmployees.get(employee.getDepartment()) + 1);
-            } else {
-                departmentEmployees.put(employee.getDepartment(), 1);
-            }
-        }
-        return departmentEmployees;
+    public Map<String, Long> countNumberOfEmployeesInEachDepartment(List<Employee> employees) {
+        return employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting()));
     }
 
     /**
-     * We are iterating through the list of employees and adding the salary of each
-     * employee to the departmentEmployees
-     * map.
-     * We are also using the countNumberOfEmployeesInEachDepartment function to get
-     * the number of employees in each
-     * department.
-     * After we have the total salary of each department, we are dividing it by the
-     * number of employees in that department
-     * to get the average salary.
-     * We are returning the departmentEmployees map which now contains the average
-     * salary of each department.
-     *
+     * It takes a list of employees and returns a map of department to average
+     * salary of employees in
+     * that department
+     * 
      * @param employees List of employees
-     * @return A map of department and average salary of employees in that
-     * department.
+     * @return A map of department names and the average salary of employees in that
+     *         department.
      */
-    public Map<String, Long> averageSalaryOfEachDepartment(List<Employee> employees) {
-        Map<String, Long> departmentEmployees = new LinkedHashMap<>();
-        Map<String, Integer> noOfEmployeesInEachDepartment = this.countNumberOfEmployeesInEachDepartment(employees);
-
-        for (Employee employee : employees) {
-            if (departmentEmployees.containsKey(employee.getDepartment())) {
-                departmentEmployees.put(employee.getDepartment(),
-                        departmentEmployees.get(employee.getDepartment()) + employee.getSalary());
-            } else {
-                departmentEmployees.put(employee.getDepartment(), employee.getSalary());
-            }
-        }
+    public Map<String, Double> averageSalaryOfEachDepartment(List<Employee> employees) {
+        Map<String, Double> departmentEmployees = employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.averagingLong(Employee::getSalary)));
 
         departmentEmployees.replaceAll(
-                (department, salary) -> salary / noOfEmployeesInEachDepartment.get(department));
+                (department, salary) -> this.getFormattedDouble(salary));
         return departmentEmployees;
     }
 
@@ -150,7 +110,8 @@ public class MainApp {
      */
     public Employee getYoungestMaleEmployee(List<Employee> employees) throws EmployeeNotFound {
         return employees.stream()
-                .filter(employee -> employee.getDepartment().equalsIgnoreCase("productDevelopment") && employee.getGender().equalsIgnoreCase("male"))
+                .filter(employee -> employee.getDepartment().equalsIgnoreCase("productDevelopment")
+                        && employee.getGender().equalsIgnoreCase("male"))
                 .min(Comparator.comparingInt(Employee::getAge))
                 .orElseThrow(() -> new EmployeeNotFound("productDevelopment"));
     }
@@ -167,101 +128,53 @@ public class MainApp {
     }
 
     /**
-     * It takes a list of employees and returns a map of departments and a map of
-     * genders and the number of employees of
-     * that gender in that department
-     *
+     * It takes a list of employees and returns a map of departments to a map of
+     * genders to the number
+     * of employees of that gender in that department
+     * 
      * @param employees List of employees
-     * @return A map of maps. The outer map has two keys, "sales" and "marketing".
-     * The inner maps have two keys, "male" and
-     * "female". The values of the inner maps are the number of employees in
-     * the department with the corresponding gender.
+     * @return A map of maps.
      */
-    public Map<String, Map<String, Integer>> employeesInSaleAndMarketing(List<Employee> employees) {
-        Map<String, Map<String, Integer>> maleAndFemales = new LinkedHashMap<>();
-        Map<String, Integer> sales = new LinkedHashMap<>();
-        Map<String, Integer> marketing = new LinkedHashMap<>();
-        employees.forEach(employee -> {
-            if (employee.getDepartment().equalsIgnoreCase("sales")) {
-                if (employee.getGender().equalsIgnoreCase("male")) {
-                    if (sales.containsKey("male"))
-                        sales.put("male", sales.get("male") + 1);
-                    else
-                        sales.put("male", 1);
-                } else {
-                    if (sales.containsKey("female"))
-                        sales.put("female", sales.get("female") + 1);
-                    else
-                        sales.put("female", 1);
-                }
-            } else if (employee.getDepartment().equalsIgnoreCase("marketing")) {
-                if (employee.getGender().equalsIgnoreCase("male")) {
-                    if (marketing.containsKey("male"))
-                        marketing.put("male", marketing.get("male") + 1);
-                    else
-                        marketing.put("male", 1);
-                } else {
-                    if (marketing.containsKey("female"))
-                        marketing.put("female", marketing.get("female") + 1);
-                    else
-                        marketing.put("female", 1);
-                }
-            }
-        });
+    public Map<String, Map<String, Long>> employeesInSaleAndMarketing(List<Employee> employees) {
+        Map<String, Map<String, Long>> maleAndFemales = new LinkedHashMap<>();
 
-        maleAndFemales.put("sales", sales);
-        maleAndFemales.put("marketing", marketing);
+        Map<String, Map<String, Long>> groupedEmployees = employees.stream().collect(Collectors
+                .groupingBy(Employee::getDepartment,
+                        Collectors.groupingBy(Employee::getGender, Collectors.counting())));
+
+        maleAndFemales.put("sales", groupedEmployees.get("sales"));
+        maleAndFemales.put("marketing", groupedEmployees.get("marketing"));
         return maleAndFemales;
     }
 
     /**
-     * It takes a list of employees and returns a map of average salaries for male
-     * and female employees
-     *
-     * @param employees a list of employees
-     * @return A map with the average salary of male and female employees.
+     * It takes a list of employees, groups them by gender, and then averages their
+     * salaries
+     * 
+     * @param employees List of employees
+     * @return A map of gender to average salary.
      */
-    public Map<String, Long> avgMaleFemaleSalary(List<Employee> employees) {
-        Long[] genders = {0L, 0L, 0L};
-        employees.forEach(employee -> {
-            if (employee.getGender().equalsIgnoreCase("male")) {
-                genders[0] += employee.getSalary();
-                genders[2]++;
-            } else
-                genders[1] += employee.getSalary();
-        });
-        Map<String, Long> avgSalary = new HashMap<>();
-        avgSalary.put("male", genders[0] / genders[2]);
-        avgSalary.put("female", genders[1] / (employees.size() - genders[2]));
+    public Map<String, Double> avgMaleFemaleSalary(List<Employee> employees) {
+
+        Map<String, Double> avgSalary = employees.stream()
+                .collect(Collectors.groupingBy(Employee::getGender, Collectors.averagingLong(Employee::getSalary)));
+
+        avgSalary.replaceAll((gender, salary) -> this.getFormattedDouble(salary));
         return avgSalary;
     }
 
     /**
-     * We're iterating over the list of employees, and for each employee, we're
-     * checking if the departmentEmployees map
-     * already contains the employee's department. If it does, we're adding the
-     * employee's name to the list of names for
-     * that department. If it doesn't, we're creating a new list with the employee's
-     * name and adding it to the map
-     *
+     * It takes a list of employees and returns a map of department to a list of
+     * employee names in that
+     * department
+     * 
      * @param employees List<Employee>
-     * @return A map of departments and the employees in each department.
+     * @return A map of department to a list of employees in that department.
      */
     public Map<String, List<String>> employeesInEachDepartment(List<Employee> employees) {
-        Map<String, List<String>> departmentEmployees = new LinkedHashMap<>();
-        employees.forEach(employee -> {
-            if (departmentEmployees.containsKey(employee.getDepartment())) {
-                List<String> namesList = departmentEmployees.get(employee.getDepartment());
-                namesList.add(employee.getName());
-                departmentEmployees.put(employee.getDepartment(), namesList);
-            } else {
-                List<String> name = new ArrayList<>();
-                name.add(employee.getName());
-                departmentEmployees.put(employee.getDepartment(), name);
-            }
-        });
-
-        return departmentEmployees;
+        return employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment,
+                        Collectors.mapping(Employee::getName, Collectors.toList())));
     }
 
     /**
@@ -270,7 +183,7 @@ public class MainApp {
      *
      * @param employees a list of employees
      * @return A map with two keys, "total" and "average", and the corresponding
-     * values.
+     *         values.
      */
     public Map<String, Long> avgAndTotalSalary(List<Employee> employees) {
         Long totalSalary = employees.stream().map(Employee::getSalary).reduce(Long::sum).get();
@@ -316,6 +229,13 @@ public class MainApp {
         return Collections.max(employees, Comparator.comparingInt(Employee::getAge));
     }
 
+    /**
+     * It takes the number of employees as input, and then takes the details of each
+     * employee as input
+     * and returns a list of employees
+     * 
+     * @return A list of employees
+     */
     public List<Employee> getList() {
         int noOfEmployees = sc.nextInt();
         List<Employee> employees = new ArrayList<>();
@@ -339,6 +259,10 @@ public class MainApp {
             employees.add(new Employee(id, name, age, gender, department, yearOfJoining, salary));
         }
         return employees;
+    }
+
+    public Double getFormattedDouble(Double value) {
+        return Double.valueOf(new DecimalFormat("#.##").format(value));
     }
 
 }

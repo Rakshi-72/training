@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="471fa030-4bf8-464d-b7f1-f004f7e4c04d" name="Changes" comment="">
+    <list default="true" id="471fa030-4bf8-464d-b7f1-f004f7e4c04d" name="Changes" comment="slightlly modified">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/main_app/test/MainAppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/main_app/test/MainAppTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +45,7 @@
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.MainAppTest.getYoungestMaleEmployeeTest">
+  <component name="RunManager" selected="JUnit.MainAppTest (1)">
     <configuration name="MainAppTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="training" />
       <extension name="coverage">
@@ -57,15 +56,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="main_app.test" />
       <option name="MAIN_CLASS_NAME" value="main_app.test.MainAppTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MainAppTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="training" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MainAppTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -87,11 +77,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainAppTest.countMaleAndFemaleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MainAppTest.averageSalaryOfEachDepartmentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="training" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MainAppTest" />
-      <option name="METHOD_NAME" value="countMaleAndFemaleTest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main_app.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main_app.test" />
+      <option name="MAIN_CLASS_NAME" value="main_app.test.MainAppTest" />
+      <option name="METHOD_NAME" value="averageSalaryOfEachDepartmentTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -113,13 +109,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MainAppTest.oldestEmployee" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="training" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main_app.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main_app.test" />
+      <option name="MAIN_CLASS_NAME" value="main_app.test.MainAppTest" />
+      <option name="METHOD_NAME" value="oldestEmployee" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MainAppTest (1)" />
+        <item itemvalue="JUnit.MainAppTest.averageSalaryOfEachDepartmentTest" />
+        <item itemvalue="JUnit.MainAppTest.oldestEmployee" />
         <item itemvalue="JUnit.MainAppTest.getYoungestMaleEmployeeTest" />
         <item itemvalue="JUnit.MainAppTest.allDepartmentsTest" />
-        <item itemvalue="JUnit.MainAppTest (1)" />
-        <item itemvalue="JUnit.MainAppTest.countMaleAndFemaleTest" />
-        <item itemvalue="JUnit.MainAppTest" />
       </list>
     </recent_temporary>
   </component>
@@ -132,6 +144,14 @@
       <option name="presentableId" value="Default" />
       <updated>1665053320333</updated>
     </task>
+    <task id="LOCAL-00001" summary="slightlly modified">
+      <created>1665237704157</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1665237704157</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -144,6 +164,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="slightlly modified" />
+    <option name="LAST_COMMIT_MESSAGE" value="slightlly modified" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
