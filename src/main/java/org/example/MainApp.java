@@ -200,27 +200,14 @@ public class MainApp {
      * @param employees List of employees
      * @return A map of employees.
      */
-    public Map<String, List<Employee>> separateEmployees(List<Employee> employees) {
-        List<Employee> under25 = new ArrayList<>();
-        List<Employee> above25 = new ArrayList<>();
-        employees.forEach(employee -> {
-            if (employee.getAge() < 26)
-                under25.add(employee);
-            else
-                above25.add(employee);
-        });
-        Map<String, List<Employee>> mapOfEmployees = new LinkedHashMap<>();
-        mapOfEmployees.put("under25", under25);
-        mapOfEmployees.put("above25", above25);
+    public Map<String, List<String>> separateEmployees(List<Employee> employees) {
 
-        /**** ! can also be done like this ****/
-        /*
-         * Grouping the employees by age > 25 and then mapping the names of the
-         * employees to a list.
-         */
-        // Map<Boolean, List<String>> collected =
-        // employees.stream().collect(Collectors.groupingBy(e -> e.getAge() > 25,
-        // Collectors.mapping(Employee::getName, Collectors.toList())));
+        Map<Boolean, List<String>> collected = employees.stream().collect(Collectors.groupingBy(e -> e.getAge() > 25,
+                Collectors.mapping(Employee::getName, Collectors.toList())));
+
+        Map<String, List<String>> mapOfEmployees = new LinkedHashMap<>();
+        mapOfEmployees.put("under25", collected.get(false));
+        mapOfEmployees.put("above25", collected.get(true) == null ? new ArrayList<>() : collected.get(true));
 
         return mapOfEmployees;
     }

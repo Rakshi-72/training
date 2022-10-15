@@ -226,8 +226,8 @@ public class MainAppTest {
      */
     @Test
     public void separateEmployeesTest() {
-        Map<String, List<Employee>> expected = new HashMap<>();
-        expected.put("under25", employees);
+        Map<String, List<String>> expected = new HashMap<>();
+        expected.put("under25", List.of("rakshith", "ramya", "ranjini", "kichha", "Dilip"));
         expected.put("above25", new ArrayList<>());
         assertEquals(expected, app.separateEmployees(employees), "same list has to be returned");
     }
