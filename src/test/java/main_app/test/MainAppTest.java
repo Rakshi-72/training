@@ -43,7 +43,6 @@ public class MainAppTest {
     /**
      * This function creates a new instance of the MainApp class before each test
      */
-
     @BeforeEach
     public void createNewInstance(TestInfo testInfo, TestReporter testReporter) {
         this.testInfo = testInfo;
