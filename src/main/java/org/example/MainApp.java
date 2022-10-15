@@ -212,6 +212,16 @@ public class MainApp {
         Map<String, List<Employee>> mapOfEmployees = new LinkedHashMap<>();
         mapOfEmployees.put("under25", under25);
         mapOfEmployees.put("above25", above25);
+
+        /**** ! can also be done like this ****/
+        /*
+         * Grouping the employees by age > 25 and then mapping the names of the
+         * employees to a list.
+         */
+        // Map<Boolean, List<String>> collected =
+        // employees.stream().collect(Collectors.groupingBy(e -> e.getAge() > 25,
+        // Collectors.mapping(Employee::getName, Collectors.toList())));
+
         return mapOfEmployees;
     }
 
@@ -239,21 +249,14 @@ public class MainApp {
         int noOfEmployees = sc.nextInt();
         List<Employee> employees = new ArrayList<>();
         for (int i = 0; i < noOfEmployees; i++) {
-            System.out.println("enter id");
             Integer id = sc.nextInt();
             sc.nextLine();
-            System.out.println("enter name");
             String name = sc.nextLine();
-            System.out.println("enter age");
             Integer age = sc.nextInt();
             sc.nextLine();
-            System.out.println("enter gender");
             String gender = sc.nextLine();
-            System.out.println("enter department");
             String department = sc.nextLine();
-            System.out.println("enter year of joining");
             Integer yearOfJoining = sc.nextInt();
-            System.out.println("enter the salary");
             Long salary = sc.nextLong();
             employees.add(new Employee(id, name, age, gender, department, yearOfJoining, salary));
         }

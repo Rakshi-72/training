@@ -186,7 +186,7 @@ public class MainAppTest {
         expected.put("male", 1310000.00);
         expected.put("female", 192000.00);
 
-        assertEquals(expected, app.avgMaleFemaleSalary(employees), "avg salary male = 1310000, female = 192000");
+        assertEquals(expected, app.avgMaleFemaleSalary(employees), "avg salary male = 1310000.00, female = 192000.00");
     }
 
     /**
