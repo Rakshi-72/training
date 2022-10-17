@@ -3,6 +3,7 @@ package main_app.test;
 import org.example.MainApp;
 import org.example.exceptions.EmployeeNotFound;
 import org.example.model.Employee;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ public class MainAppTest {
 
     /**
      * It returns a list of employees
-     * 
+     *
      * @return A list of employees
      */
     private List<Employee> getList() {
@@ -48,6 +49,10 @@ public class MainAppTest {
         this.testInfo = testInfo;
         this.testReporter = testReporter;
         app = new MainApp();
+    }
+
+    @AfterEach
+    public void separateMethods() {
         System.out.println("------------------------------------------");
     }
 
@@ -58,10 +63,8 @@ public class MainAppTest {
     @DisplayName("count number of male and female employees")
     public void countMaleAndFemaleTest() {
         Map<String, Long> countMaleAndFemale = app.countMaleAndFemale(employees);
-        Map<String, Long> actualResultMap = new HashMap<>();
-        actualResultMap.put("male", 3L);
-        actualResultMap.put("female", 2L);
-        assertEquals(actualResultMap, countMaleAndFemale, "count should be male :3, female :2");
+        Map<String, Long> expected = Map.of("male", 3L, "female", 2L);
+        assertEquals(expected, countMaleAndFemale, "count should be male :3, female :2");
         testReporter.publishEntry(testInfo.getDisplayName() + " ran successfully");
     }
 
@@ -73,11 +76,8 @@ public class MainAppTest {
     @Test
     @DisplayName("display all the departments present in the list")
     public void allDepartmentsTest() {
-        List<String> departments = new ArrayList<>();
-        departments.add("development");
-        departments.add("design");
-        departments.add("sales");
-        departments.add("marketing");
+
+        List<String> departments = List.of("development", "design", "sales", "marketing");
 
         assertEquals(departments, app.allDepartments(employees),
                 "it should contains 'development', 'design', 'sales', 'marketing' ");
@@ -92,9 +92,8 @@ public class MainAppTest {
     @Test
     @DisplayName("calculate average age of male and female employees")
     public void averageAgeOfEmployeesTest() {
-        Map<String, Double> averageAge = new HashMap<>();
-        averageAge.put("male", 22.33);
-        averageAge.put("female", 24.00);
+        Map<String, Double> averageAge = Map.of("male", 22.33, "female", 24.00);
+
         assertEquals(averageAge, app.averageAgeOfEmployees(employees), "average age of male :22.33, female :24.00");
         testReporter.publishEntry(testInfo.getDisplayName() + " ran successfully");
 
@@ -118,7 +117,7 @@ public class MainAppTest {
      * passed to it
      */
     @Test
-    @DisplayName("gget all the employees joined after 2015")
+    @DisplayName("get all the employees joined after 2015")
     public void getEmployeesJoinedAfter2015Test() {
         assertEquals(employees, app.getEmployeesJoinedAfter2015(employees), "result should be same list passed");
         testReporter.publishEntry(testInfo.getDisplayName() + " ran successfully");
@@ -133,11 +132,8 @@ public class MainAppTest {
     @Test
     @DisplayName("count number of employees present in each department")
     public void countNumberOfEmployeesInEachDepartmentTest() {
-        Map<String, Long> expected = new HashMap<>();
-        expected.put("development", 2L);
-        expected.put("design", 1L);
-        expected.put("marketing", 1L);
-        expected.put("sales", 1L);
+
+        var expected = Map.of("development", 2L, "design", 1L, "marketing", 1L, "sales", 1L);
 
         assertEquals(expected, app.countNumberOfEmployeesInEachDepartment(employees),
                 "development :2, design :1, marketing :1, sales :1");
@@ -152,12 +148,7 @@ public class MainAppTest {
     @Test
     @DisplayName("calculate average salary of each department")
     public void averageSalaryOfEachDepartmentTest() {
-        Map<String, Double> expected = new HashMap<>();
-        expected.put("development", 1925000.00);
-        expected.put("design", 34000.00);
-        expected.put("marketing", 300000.00);
-        expected.put("sales", 130000.00);
-
+        var expected = Map.of("development", 1925000.00, "design", 34000.00, "marketing", 300000.00, "sales", 130000.00);
         assertEquals(expected, app.averageSalaryOfEachDepartment(employees), "should calculate accurate average");
         testReporter.publishEntry(testInfo.getDisplayName() + " ran successfully");
 
@@ -218,9 +209,8 @@ public class MainAppTest {
     @Test
     @DisplayName("count average salary of male and female employees")
     public void avgMaleFemaleSalaryTest() {
-        Map<String, Double> expected = new HashMap<>();
-        expected.put("male", 1310000.00);
-        expected.put("female", 192000.00);
+
+        var expected = Map.of("male", 1310000.00, "female", 192000.00);
 
         assertEquals(expected, app.avgMaleFemaleSalary(employees), "avg salary male = 1310000.00, female = 192000.00");
         testReporter.publishEntry(testInfo.getDisplayName() + " ran successfully");
@@ -234,11 +224,12 @@ public class MainAppTest {
     @Test
     @DisplayName("separate employees present in each department")
     public void employeesInEachDepartmentTest() {
-        Map<String, List<String>> expected = new HashMap<>();
-        expected.put("development", List.of("rakshith", "ranjini"));
-        expected.put("design", List.of("ramya"));
-        expected.put("sales", List.of("kichha"));
-        expected.put("marketing", List.of("Dilip"));
+        var expected = Map.of(
+                "development", List.of("rakshith", "ranjini"),
+                "design", List.of("ramya"),
+                "sales", List.of("kichha"),
+                "marketing", List.of("Dilip")
+        );
 
         assertEquals(expected, app.employeesInEachDepartment(employees),
                 "sales= Dilip, development= rakshith, ranjini, design= ramya, sales= kichha");
@@ -254,9 +245,8 @@ public class MainAppTest {
     @Test
     @DisplayName("get average and total salary of employees")
     public void avgAndTotalSalary() {
-        Map<String, Long> expected = new HashMap<>();
-        expected.put("total", 4314000L);
-        expected.put("average", 4314000L / 5);
+
+        var expected = Map.of("total", 4314000L, "average", 4314000L / 5);
 
         assertEquals(expected, app.avgAndTotalSalary(employees), "avg= " + 4314000 / 5 + "total= 4314000");
         testReporter.publishEntry(testInfo.getDisplayName() + " ran successfully");
