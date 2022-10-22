@@ -14,7 +14,7 @@ public class MainApp {
      * It takes a list of employees and returns a map of gender to the number of
      * employees of that
      * gender
-     * 
+     *
      * @param employees List of employees
      * @return A map of the genders and the number of employees of that gender.
      */
@@ -38,7 +38,7 @@ public class MainApp {
      * It takes a list of employees and returns a map of gender to average age of
      * employees of that
      * gender
-     * 
+     *
      * @param employees List of employees
      * @return A map of gender to average age of employees.
      */
@@ -74,10 +74,10 @@ public class MainApp {
      * It takes a list of employees and returns a map of department to number of
      * employees in that
      * department
-     * 
+     *
      * @param employees List of employees
      * @return A map of department names and the number of employees in each
-     *         department.
+     * department.
      */
     public Map<String, Long> countNumberOfEmployeesInEachDepartment(List<Employee> employees) {
         return employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting()));
@@ -87,10 +87,10 @@ public class MainApp {
      * It takes a list of employees and returns a map of department to average
      * salary of employees in
      * that department
-     * 
+     *
      * @param employees List of employees
      * @return A map of department names and the average salary of employees in that
-     *         department.
+     * department.
      */
     public Map<String, Double> averageSalaryOfEachDepartment(List<Employee> employees) {
         Map<String, Double> departmentEmployees = employees.stream()
@@ -123,14 +123,14 @@ public class MainApp {
      * @return employee with the max experience
      */
     public Employee getMaxExperiencedEmployee(List<Employee> employees) {
-        return employees.stream().min(Comparator.comparingInt(Employee::getYearOfJoining)).get();
+        return employees.stream().min(Comparator.comparingInt(Employee::getYearOfJoining)).orElseThrow(() -> new RuntimeException("sorry couldn't found any"));
     }
 
     /**
      * It takes a list of employees and returns a map of departments to a map of
      * genders to the number
      * of employees of that gender in that department
-     * 
+     *
      * @param employees List of employees
      * @return A map of maps.
      */
@@ -149,7 +149,7 @@ public class MainApp {
     /**
      * It takes a list of employees, groups them by gender, and then averages their
      * salaries
-     * 
+     *
      * @param employees List of employees
      * @return A map of gender to average salary.
      */
@@ -166,7 +166,7 @@ public class MainApp {
      * It takes a list of employees and returns a map of department to a list of
      * employee names in that
      * department
-     * 
+     *
      * @param employees List<Employee>
      * @return A map of department to a list of employees in that department.
      */
@@ -182,10 +182,10 @@ public class MainApp {
      *
      * @param employees a list of employees
      * @return A map with two keys, "total" and "average", and the corresponding
-     *         values.
+     * values.
      */
     public Map<String, Long> avgAndTotalSalary(List<Employee> employees) {
-        Long totalSalary = employees.stream().map(Employee::getSalary).reduce(Long::sum).get();
+        Long totalSalary = employees.stream().map(Employee::getSalary).reduce(Long::sum).orElseThrow(() -> new RuntimeException(" sorry unable to sum longs"));
         Map<String, Long> salaries = new LinkedHashMap<>();
         salaries.put("total", totalSalary);
         salaries.put("average", totalSalary / employees.size());
@@ -229,7 +229,7 @@ public class MainApp {
      * It takes the number of employees as input, and then takes the details of each
      * employee as input
      * and returns a list of employees
-     * 
+     *
      * @return A list of employees
      */
     public List<Employee> getList() {

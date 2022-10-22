@@ -12,8 +12,21 @@ public class Employee {
     public Employee() {
     }
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
+                ", department='" + department + '\'' +
+                ", yearOfJoining=" + yearOfJoining +
+                ", salary=" + salary +
+                '}';
+    }
+
     public Employee(Integer id, String name, Integer age, String gender, String department, Integer yearOfJoining,
-            Long salary) {
+                    Long salary) {
         this.id = id;
         this.name = name;
         this.age = age;
